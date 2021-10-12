@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#checkedAllBtn").click(function () {
+                $("input[name='items']").prop("checked", true);
+            });
+
+            $("#checkedNoBtn").click(function () {
+                $("input[name='items']").prop("checked", false);
+            });
+
+            $("#checkedRevBtn").click(function () {
+                // each方式遍历，不要忘记里边的function，this代表的是dom对象
+                $("input[name='items']").each(function () {
+                    this.checked = !this.checked
+                });
+            });
+
+            // 对所有name为item的checkbox绑定一个click事件，判断当4个items 多选框都被选中时，勾选全选框
+            $(":checkbox[name='items']").click(function () {
+                var allCount = $(":checkbox[name='items']").length;
+                var allCheckedCount = $(":checkbox[name='items']:checked").length;
+
+                // if (allCount === allCheckedCount) {
+                //     $("#checkedAll").prop("checked", true);
+                // } else {
+                //     $("#checkedAll").prop("checked", false);
+                // }
+                // 可以把上面的优化一下
+                $("#checkedAll").prop("checked", allCount === allCheckedCount);
+            });
+
+            // 对全选/全不选绑定单击事件
+            $("#checkedAll").click(function () {
+                // 在事件function函数中，有一个this对象，这个this对象是当前正在响应dom对象
+                // alert(this.id); // 会显示checkedAll
+                if(this.checked) {
+                    $(":checkbox[name='items']").prop("checked", true);
+                } else {
+                    $(":checkbox[name='items']").prop("checked", false)
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    你爱好的运动是? <input type="checkbox" id="checkedAll" value="all">全选/全不选<br/>
+    <input type="checkbox" name="items" value="football">足球
+    <input type="checkbox" name="items" value="basketball">篮球
+    <input type="checkbox" name="items" value="badminton">羽毛球
+    <input type="checkbox" name="items" value="ping-pong">乒乓球<br/>
+    <input id="checkedAllBtn" type="button" value="全选"/>
+    <input id="checkedNoBtn" type="button" value="全不选"/>
+    <input id="checkedRevBtn" type="button" value="反选"/>
+    <input id="sendBtn" type="button" value="提交">
+</body>
+</html>

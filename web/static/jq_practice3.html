@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+    <script type="text/javascript">
+        var deleteFunc = function() {
+            var $trObj = $(this).parent().parent();
+            var name = $trObj.find("td:first").text();
+            if (confirm("are you sure delete " + name)) {
+                $trObj.remove();
+            }
+        }
+
+        $(function () {
+            $("#addEmpButton").click(function () {
+                var newTr = $("<tr></tr>");
+                $("<td></td>").html($("#empName").prop("value")).appendTo(newTr);
+                $("<td></td>").html($("#email").prop("value")).appendTo(newTr);
+                $("<td></td>").html($("#salary").prop("value")).appendTo(newTr);
+                $("<td><a href='#'>Delete</a></td>").appendTo(newTr);
+                newTr.appendTo($("#employeeTable"));
+                // .appendTo($("#employeeTable"));
+                // 注意这个写法，没有括号，而且也没有function，其实传入click的是一个定义的function，而deleteFunc本身就是一个function
+                // 如果写成deleteFunc()，则代表把函数的返回值传给click
+                // 还有一种写法function() { deleteFunc() } 这样是错误的，因为delete利用了this，function的this和delete的this不是同一个this了
+                // 在事件function函数中，有一个this对象，这个this对象是当前正在响应dom对象，可能因为他们不是同一个function
+                newTr.find("a").click( deleteFunc );
+            });
+            $("a[href='#']").click( deleteFunc );
+        });
+    </script>
+</head>
+<body>
+<table id="employeeTable">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Salary</th>
+        <th>&nbsp;</th>
+    </tr>
+    <tr>
+        <td>Tom</td>
+        <td>tom@tom.com</td>
+        <td>5000</td>
+        <td><a href="#">Delete</a></td>
+    </tr>
+    <tr>
+        <td>Jerry</td>
+        <td>jerry@sohu.com</td>
+        <td>8000</td>
+        <td><a href="#">Delete</a></td>
+    </tr>
+    <tr>
+        <td>Bob</td>
+        <td>bob@tom.com</td>
+        <td>10000</td>
+        <td><a href="#">Delete</a></td>
+    </tr>
+</table>
+
+<div id="formDiv">
+
+    <h4>添加新员工</h4>
+
+    <table>
+        <tr>
+            <td class="word">name: </td>
+            <td class="inp">
+                <input type="text" name="empName" id="empName" />
+            </td>
+        </tr>
+        <tr>
+            <td class="word">email: </td>
+            <td class="inp">
+                <input type="text" name="email" id="email" />
+            </td>
+        </tr>
+        <tr>
+            <td class="word">salary: </td>
+            <td class="inp">
+                <input type="text" name="salary" id="salary" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <button id="addEmpButton" value="abc">
+                    Submit
+                </button>
+            </td>
+        </tr>
+    </table>
+
+</div>
+</body>
+</html>

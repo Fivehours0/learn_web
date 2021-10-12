@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+    <script type="text/javascript">
+        $(function () { // 表示页面加载完成之后，相当于window.onload=function() {}
+            var $btnObj = $("#btnId"); // 表示按id查询标签对象
+            $btnObj.click(function () { // 绑定单机事件
+                alert("say hello");
+            });
+
+            /*
+                层级选择器
+                btnid1: 选择body下的所有div
+                btnid2: 在body内选择div子元素
+                btnid3: 选择id为one的下一个div元素
+                btnid4: 选择id为one之后的所有div兄弟元素
+             */
+            $("#btnId1").click(function () {
+                var $body = $("body div");
+                alert($body.length); // 返回5，div1的div他也选中了
+            })
+            $("#btnId2").click(function () {
+                var $body = $("body > div");
+                alert($body.length); // 返回3，div1的div和div3的div没选中，因为div1的div和div3的div是body的孙子元素
+            })
+            $("#btnId3").click(function () {
+                var $oneNextDiv = $("#one+div");
+                alert($oneNextDiv[0].id);
+            })
+            $("#btnId4").click(function () {
+                var $oneNextAllDiv = $("#one~div"); // 返回2，注意是兄弟元素,div3的div不算在内
+                alert($oneNextAllDiv.length);
+            })
+
+
+            /*
+                基本选择器
+                btnid11: 选择第一个div
+                btnid21: 选择最后一个div
+                btnid31: 选择class不为one的div
+                btnid41: 选择索引为偶数的div
+                btnid51: 选择索引为奇数的div
+                div:gt(3) 选择索引值大于3的div
+                eq(3) 等于3  lt(3)小于3
+                $(":header") 选择所有标签元素
+                $(":animated")  选择所有执行动画的元素
+                $("div:not(:animated):last")  选择没有执行动画的最后一个div
+             */
+            $("#btnId11").click(function () {
+                var $firstDiv = $("div:first");
+                alert($firstDiv[0].id);
+            })
+            $("#btnId21").click(function () {
+                var $lastDiv = $("div:last");
+                alert($lastDiv[0].innerHTML);
+            })
+            $("#btnId31").click(function () {
+                 var $div = $("div:not(.one)");
+                alert($div.length); // 2
+            })
+            $("#btnId41").click(function () {
+                var $div = $("div:even");
+                alert($div.length); // 2
+            })
+            $("#btnId51").click(function () {
+                var $div = $("div:odd");
+                alert($div.length); // 2
+            })
+
+            /*
+                内容选择器
+                #btnId12    选择文本内容含有 '1'的div标签
+
+                #btnId22    $("div:empty"); 选择不包含有子元素和文本元素的div
+                $("div:has(.mini)");   选择含有  class为mini   元素的  div元素
+                $("div:parent");        选择含有子元素或者文本元素的div
+             */
+            $("#btnId12").click(function () {
+                var $firstDiv = $("div:contains('1')");
+                alert($firstDiv[0].id);
+            })
+            $("#btnId22").click(function () {
+                var $firstDiv = $("div:empty");
+                alert($firstDiv.length);
+            })
+
+            /*
+                属性过滤器
+                $("div[title]");    选择含有title属性的div
+                $("div[title='test']");    选择含有title属性，并且属性值为test的div
+                $("div[title!='test']");    选择不含有title属性的div   和  含有title属性，但是属性值不是test的div
+                $("div[title^='te']");    选择含有title属性，并且属性值以te开头的div
+                $("div[title$='est']");    选择含有title属性，并且属性值以est结尾的div
+                $("div[title*='es']");    选择含有title属性，并且属性值含有es的div
+                $("div[id][title*='es']");    选择含有id属性的div结果集中  含有title属性，并且属性值含有es的div
+                $("div[title][title!='test']");     选择含有title属性的div结果集中  含有title属性，并且属性值不等于test的div，
+                相当于去掉了不含有title属性的div，与第3个对应
+             */
+            // 上面的注释部分没有代码
+
+
+            // $("div").replaceWith( $("<h1> 标题替换 </h1>>") );
+            $("<h1> 标题替换 </h1>>").replaceAll( $("div") );
+        });
+
+
+    </script>
+</head>
+<body>
+    <button id="btnId">SayHello</button>
+    <button id="btnId1">btnId1</button>
+    <button id="btnId2">btnId2</button>
+    <button id="btnId3">btnId3</button>
+    <button id="btnId4">btnId4</button><br/>
+
+    <button id="btnId11">btnId11</button>
+    <button id="btnId21">btnId21</button>
+    <button id="btnId31">btnId31</button>
+    <button id="btnId41">btnId41</button>
+    <button id="btnId51">btnId51</button><br/>
+
+    <button id="btnId12">btnId12</button>
+    <button id="btnId22">btnId22</button>
+
+    <button id="replaceWith">replceWith</button>
+    <button id="replaceAll">replceAll</button>
+
+
+    <div id="one" class="one">div1
+        <div class="two">div1的div</div>
+        <span>div1的span</span>
+    </div>
+    <div id="two" class="one">div2
+        <span>div2的span</span>
+    </div>
+    <div id="three" class="one">div3
+        <div class="two">div3的div</div>
+        <span>div3的span</span>
+    </div>
+</body>
+</html>

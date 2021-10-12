@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        div{
+            width:100px;
+            height:260px;
+        }
+
+        div.whiteborder{
+            border: 2px white solid;
+        }
+
+        div.redDiv{
+            background-color: red;
+        }
+
+        div.blueBorder{
+            border: 5px blue solid;
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var $divFirst = $("div:first");
+            // <div class="border redDiv blueBorder"> </div>  使用之后是这样的效果
+            $("#btn01").click(function () {
+                $divFirst.addClass('redDiv blueBorder');
+            });
+        })
+
+    </script>
+</head>
+<body>
+    <table align="center">
+        <tr>
+            <td>
+<!--                我要做的是往这个div里面添加样式-->
+                <div class="border">
+                </div>
+            </td>
+
+            <td>
+                <div class="btn">
+                    <input type="button" value="addClass()" id="btn01"/>
+                    <input type="button" value="removeClass()" id="btn02"/>
+                    <input type="button" value="toggleClass()" id="btn03"/>
+                    <input type="button" value="offset()" id="btn04"/>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+
+
+    <br /> <br />
+
+
+    <br /> <br />
+</body>
+</html>
