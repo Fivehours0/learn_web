@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <style type="text/css">
+        body {
+            text-align: center;
+        }
+        #small {
+            margin-top: 150px;
+        }
+        #showBig {
+            position: absolute;
+            display: none;
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $("#small").bind("mousemove mouseover mouseout", function (event) {
+                // 鼠标移入就显示大图片
+                if (event.type === "mouseover") {
+                    $("#showBig").show();
+                } else if (event.type === "mouseout") { // 鼠标移出就隐藏大图片
+                    $("#showBig").hide();
+                } else if (event.type === "mousemove") { // 设置大图片的坐标跟随鼠标
+                    $("#showBig").offset({
+                        left: event.pageX + 10,  // 如果不加10会出现问题。鼠标的位置在大图片和小图片的交界处，
+                        // 如果鼠标稍微移动一下就落到大图片上了，此时浏览器会认为你移出了图片，触发hide事件，导致图片一闪一闪的
+                        top: event.pageY + 10
+                    });
+                }
+            })
+        });
+    </script>
+</head>
+<body>
+
+<img id="small" src="../img/small.jpg" />
+
+<div id="showBig">
+    <img src="../img/big.jpg">
+</div>
+
+</body>
+</html>
