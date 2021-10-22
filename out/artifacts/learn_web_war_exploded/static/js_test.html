@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--
+        js与html结合的第一种方式：
+        在head标签中或者在body标签中，使用script标签来书写js代码
+       -->
+
+    <!--
+        js与html结合的第二种方式：
+        直接使用js文件，在文件里面编写js代码
+        方式一和方式二   二选一
+        <script type="text/javascript" src="jsfile.js"> </script>
+    -->
+    <script type="text/javascript">
+        // alter() 是javaScript语言提供的一个警告框函数，他可以接收任意参数，参数就是警告框的函数信息
+        alert("hello javaScript!")
+    </script>
+
+    <!-- 可以加两个script标签，第一个标签先执行完方式二，第二个标签在执行方式一   -->
+    <script type="text/javascript">
+        // alter() 是javaScript语言提供的一个警告框函数，他可以接收任意参数，参数就是警告框的函数信息
+        alert("hello javaScript!")
+    </script>
+
+    <script type="text/javascript">
+        var i;
+        alert(i); // undefine
+        i = 12;
+        //typeof是js提供的函数，用来判断i是什么类型
+        alert(typeof (i)); // number
+        var a = 12;
+        var b = "abs";
+        alert(a*b); // NaN 是非数值，非数字
+    </script>
+
+    <!--
+        当用户点击了校验按钮，校验输入框中的内容是否合法
+        -->
+    <script type="text/javascript">
+        window.onload = function () {
+            var button1 = document.getElementById("test1");
+            button1.onclick = function () {
+                var input1 = document.getElementById("username");
+                // 使用正则表达式判断是否合法
+                var part = /^\w{5,12}$/;
+                // 通过dom对象input1的属性value来获取输入框中的值。
+                if (part.test(input1.value)) {
+                    alert("合法");
+                } else {
+                    alert("不合法");
+                }
+            }
+        }
+
+        // 一种比较常用的提示方式是在文本框后面用红色的字体显示提示信息
+
+        window.onload = function () {
+            var input1 = document.getElementById("username");
+            input1.onblur = function () {
+                var span1 = document.getElementById("test-span");
+                // 使用正则表达式判断是否合法
+                var part = /^\w{5,12}$/;
+                // 通过dom对象input1的属性value来获取输入框中的值。
+                if (part.test(input1.value)) {
+                    span1.innerHTML = "合法";
+                //    内容也可以是这样"<img src="img.jpg"></img> 用来显示一张图片"
+                } else {
+                    span1.innerHTML = "不合法";
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    用户名: <input type="text" id="username"> <span id="test-span"></span> <br/>
+    <button type="button" id="test1">校验</button>
+</body>
+</html>

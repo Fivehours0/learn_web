@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CssTest</title>
+    <style type="text/css">
+        /*
+            css与html结合的第二种方式
+            在head中定义css，会应用到相应的所有标签中, 标签中有自己的设置时，以标签中自己的设置为准
+            缺点：
+            1.只能在同一页面内复用代码，不能在多个页面内复用css代码
+            2.维护起来不方便，一个项目中会有上千万个页面，每个页面都去修改工作量大
+        */
+        /*
+            css与html结合的第三种方式：如下方式引入一个css文件，在css文件中编写相关的代码
+            <link rel="stylesheet" type="text/css" href="1.css">
+        */
+        /*
+            标签名选择器：可以决定哪些标签被动的使用这个样式
+            标签名选择器的格式：
+                标签名{
+                    属性: 值;
+                }
+        */
+        div {
+            border: 1px solid crimson;
+        }
+        span {
+            border: 1px solid crimson;
+        }
+
+        /*
+            id选择器, 在div标签2使用id=id001选择性的使用相应的属性
+         */
+        #id001{
+            border: 1px dotted blue;
+            font-size: 20px;
+        }
+        /*
+            与id选择器同理的类型选择器
+         */
+        .class01{
+            border: 1px dotted blue;
+        }
+
+        /*
+            组合选择器的格式是：
+            选择器1，选择器2，选择器3{
+                属性: 值;
+            }
+         */
+        .class02, #id002 {
+            border: 1px dotted blue;
+        }
+
+
+    </style>
+</head>
+<body>
+    <!--
+        css与html结合的方式1：使用style标签 1px表示边框1个像素，实线，颜色为crimson
+        这种方式代码复用性低，可读性差
+    -->
+    <div style="border: 2px solid crimson">div标签1</div>
+    <div id="id001">div标签2</div>
+    <span style="border: 1px solid crimson">span标签1</span> <span style="border: 1px solid crimson">span标签2</span>
+</body>
+</html>
