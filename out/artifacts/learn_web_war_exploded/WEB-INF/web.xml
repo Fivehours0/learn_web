@@ -40,4 +40,13 @@
         <servlet-name>DownloadServlet</servlet-name>
         <url-pattern>/downloadServlet</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AjaxTest</servlet-name>
+        <servlet-class>AjaxTest</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AjaxTest</servlet-name>
+        <url-pattern>/ajaxTest</url-pattern>
+    </servlet-mapping>
 </web-app>
